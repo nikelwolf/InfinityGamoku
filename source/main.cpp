@@ -1,3 +1,6 @@
+#include "mainwindow.h"
+#include <QApplication>
+
 #include <iostream>
 
 #include <GamokuCommon.h>
@@ -29,5 +32,9 @@ int main() {
     cout << gv;
     cout << gf;
 
-    return 0;
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+
+    return a.exec();
 }
