@@ -3,6 +3,11 @@ project(InfinityGamoku)
 
 set(CMAKE_CXX_STANDARD 14)
 
+set(CMAKE_AUTOMOC)
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+
 set(SOURCES
         source/Cell.cpp
         source/main.cpp
@@ -19,5 +24,8 @@ set(HEADERS
         include/GameView.h
         )
 
-add_executable(InfinityGamoku ${SOURCES} ${HEADERS})
-target_include_directories(InfinityGamoku PUBLIC include)
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+target_include_directories(${PROJECT_NAME} PUBLIC include)
+target_link_libraries(${PROJECT_NAME} Qt5::Core)
+target_link_libraries(${PROJECT_NAME} Qt5::Gui)
+target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
