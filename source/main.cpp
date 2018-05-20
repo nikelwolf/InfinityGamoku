@@ -5,7 +5,7 @@
 
 #include <GamokuCommon.h>
 
-int main() {
+int main(int argc, char* argv[]) {
     GamokuField gf;
     gf.cell(0, 0, 0).value(1);
     gf.cell(0, 1, 1).value(2);
