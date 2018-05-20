@@ -4,14 +4,20 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QGridLayout>
+#include "GameView.h"
+#include "GamokuField.h"
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = 0);
+     ~MainWindow();
+
+private:
+    //GamokuField* gmf;
+    //GameView* gmv;
 };
 
 #endif // MAINWINDOW_H

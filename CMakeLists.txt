@@ -3,11 +3,10 @@ project(InfinityGamoku)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOMOC)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Sql REQUIRED)
 
 set(SOURCES
         source/Cell.cpp
@@ -15,6 +14,7 @@ set(SOURCES
         source/FieldSector.cpp
         source/GamokuField.cpp
         source/GameView.cpp
+        source/mainwindow.cpp
         )
 
 set(HEADERS
@@ -23,8 +23,11 @@ set(HEADERS
         include/FieldSector.h
         include/GamokuField.h
         include/GameView.h
+        include/mainwindow.h
         )
 
-
-add_executable(InfinityGamoku ${SOURCES} ${HEADERS})
-target_include_directories(InfinityGamoku PUBLIC include)
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+target_include_directories(${PROJECT_NAME} PUBLIC include)
+target_link_libraries(${PROJECT_NAME} Qt5::Core)
+target_link_libraries(${PROJECT_NAME} Qt5::Gui)
+target_link_libraries(${PROJECT_NAME} Qt5::Widgets)

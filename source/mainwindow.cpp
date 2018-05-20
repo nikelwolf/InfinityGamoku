@@ -3,6 +3,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    //gmf = new GamokuField();
+    //gmv = new GameView(*gmf);
     int size = 3;
     QString cellColor = "background-color: rgb(244, 164, 96); "
                         "border: 2px solid #8f8f91; "
@@ -13,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     QVector < QVector<QPushButton*>* >  *field = new QVector<QVector<QPushButton*>*>();
 
     QWidget* widget = new QWidget(this);
-    QGridLayout* gridl = new QGridLayout(widget);
+    auto * gridl = new QGridLayout(widget);
 
     widget->setStyleSheet(fieldColor);
     for(int i=0; i < size; ++i){
@@ -31,9 +33,11 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     this->setCentralWidget(widget);
+
+
 }
 
-MainWindow::~MainWindow()
-{
+
+MainWindow::~MainWindow(){
 
 }

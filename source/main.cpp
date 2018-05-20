@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     cout << gf;
     cout << gv;
     gv.move(-3, -3);
-    gv.cell(0, 0, 0);
+
     gv.save_state();
     cout << gv;
     cout << gf;
