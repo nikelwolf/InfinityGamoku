@@ -1,10 +1,10 @@
 #include <GamokuCommon.h>
 
-GameView::GameView(GamokuField &field): GameView{field, DEFAULT_VIEW_SIZE} {
+GameView::GameView(GamokuField &field) : GameView{field, DEFAULT_VIEW_SIZE} {
 
 }
 
-GameView::GameView(GamokuField &field, uint64_t view_size): _field{field}, _field_data{view_size} {
+GameView::GameView(GamokuField &field, uint64_t view_size) : _field{field}, _field_data{view_size} {
     _current_start_sector = SectorType::UpperRight;
     _view_start_x = _view_start_y = 0;
     for (uint64_t x = 0; x < _field_data.sector_size(); x++) {

@@ -4,8 +4,8 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QGridLayout>
-#include "GameView.h"
-#include "GamokuField.h"
+
+#include <GamokuCommon.h>
 
 class MainWindow : public QMainWindow
 {
@@ -13,7 +13,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-     ~MainWindow();
+    virtual ~MainWindow();
 
 private:
     //GamokuField* gmf;

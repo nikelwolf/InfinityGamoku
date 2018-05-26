@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-{
+MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     //gmf = new GamokuField();
     //gmv = new GameView(*gmf);
     int size = 3;
@@ -37,7 +35,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
-
-MainWindow::~MainWindow(){
+MainWindow::~MainWindow() {
 
 }

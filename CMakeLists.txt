@@ -3,7 +3,7 @@ project(InfinityGamoku)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(CMAKE_AUTOMOC)
+set(CMAKE_AUTOMOC ON)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
@@ -14,6 +14,7 @@ set(SOURCES
         source/FieldSector.cpp
         source/GamokuField.cpp
         source/GameView.cpp
+        source/GameBoard.cpp
         source/mainwindow.cpp
         )
 
@@ -23,6 +24,7 @@ set(HEADERS
         include/FieldSector.h
         include/GamokuField.h
         include/GameView.h
+        include/GameBoard.h
         include/mainwindow.h
         )
 

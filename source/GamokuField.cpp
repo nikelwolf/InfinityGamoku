@@ -1,9 +1,9 @@
 #include <GamokuCommon.h>
 
-GamokuField::GamokuField(): GamokuField{DEFAULT_SECTOR_SIZE*2} {}
+GamokuField::GamokuField() : GamokuField{DEFAULT_SECTOR_SIZE * 2} {}
 
 GamokuField::GamokuField(uint64_t field_size) {
-    uint64_t sector_size = field_size/2;
+    uint64_t sector_size = field_size / 2;
     FieldSector ul{sector_size, SectorType::UpperLeft};
     FieldSector ur{sector_size, SectorType::UpperRight};
     FieldSector lr{sector_size, SectorType::LowerRight};
@@ -55,7 +55,7 @@ Cell &GamokuField::cell(SectorType sector_type, uint64_t x, uint64_t y) const {
 }
 
 uint64_t GamokuField::field_size() const {
-    return _sectors.at(0).sector_size()*2;
+    return _sectors.at(0).sector_size() * 2;
 }
 
 void GamokuField::restore_defaults() {
@@ -78,17 +78,17 @@ ostream &operator<<(ostream &os, const GamokuField &gf) {
 
     for (uint64_t y = ul.sector_size(); y > 0; y--) {
         for (uint64_t x = ul.sector_size(); x > 0; x--) {
-            os << ul.cell(y-1, x-1);
+            os << ul.cell(y - 1, x - 1);
         }
         for (uint64_t x = 0; x < ur.sector_size(); x++) {
-            os << ur.cell(y-1, x);
+            os << ur.cell(y - 1, x);
         }
         os << endl;
     }
 
     for (uint64_t y = 0; y < ll.sector_size(); y++) {
         for (uint64_t x = ll.sector_size(); x > 0; x--) {
-            os << ll.cell(y, x-1);
+            os << ll.cell(y, x - 1);
         }
         for (uint64_t x = 0; x < lr.sector_size(); x++) {
             os << lr.cell(y, x);
@@ -104,7 +104,8 @@ void GamokuField::_increase_sectors_if_need(uint64_t i, uint64_t j) {
     if (i >= sector_size || j >= sector_size) {
         uint64_t max_p = max(i, j);
         for (auto &s: _sectors) {
-            uint64_t factor_val = (max_p/SECTOR_MULTIPLY_FACTOR + 1)*SECTOR_MULTIPLY_FACTOR?:SECTOR_MULTIPLY_FACTOR;
+            uint64_t factor_val =
+                    (max_p / SECTOR_MULTIPLY_FACTOR + 1) * SECTOR_MULTIPLY_FACTOR ?: SECTOR_MULTIPLY_FACTOR;
             uint64_t inc_val = max(sector_size, factor_val) - min(sector_size, factor_val);
             s.increase(inc_val);
         }
