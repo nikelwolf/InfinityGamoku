@@ -43,7 +43,6 @@ MainWindow::MainWindow(QWidget *parent)
             cell->setStyleSheet(cellStyle);
             field->at(i)->push_back(cell);
             cell->setObjectName(QString::number(++id));
-
             //connect cell.clicked for getting id of cell
             auto *mapper = new QSignalMapper(this);
 
@@ -62,10 +61,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::cellChanged(int id)
 {
+    qDebug()<<"id:"<<id;
+
     field->at(id/size)->at(id%size)->setEnabled(false);
     field->at(id/size)->at(id%size)->setText(symbol);
-    auto x = static_cast<uint64_t>(id % size);
-    auto y = static_cast<uint64_t>(size-1 - id / size);
+    auto y = static_cast<uint64_t>(id % size);
+    auto x = static_cast<uint64_t>(size-1 - id / size);
+
 
     gameBoard.set_cell(x, y, value);
     if(gameBoard.has_winner() ){
@@ -87,7 +89,6 @@ void MainWindow::changePlayer(){
         value  = 1;
     }
 }
-MainWindow::~MainWindow(){ }
 
 void MainWindow::moveUp() {
     gameBoard.move_up();
@@ -110,13 +111,42 @@ void MainWindow::moveLeft() {
 }
 
 void MainWindow::updateView() {
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < size; ++j) {
-            auto cell = gameBoard.get_cell(i,j).ivalue();
+    for (uint64_t i = 0; i < size; ++i) {
+        for (uint64_t j = 0; j < size; ++j) {
+            auto cell = gameBoard.get_cell(j, i).ivalue();
             if(cell == 0)
                 field->at(i)->at(j)->setEnabled(true);
+            
+
             field->at(i)->at(j)->setText(symbols[cell]);
+            //auto x = static_cast<uint64_t>(id % size);
+            //auto y = static_cast<uint64_t>(size-1 - id / size);
 
         }
     }
+}
+
+void MainWindow::keyPressEvent (QKeyEvent * e)
+{
+    qDebug("Key pressed");
+    switch(e->key()) {
+        case Qt::Key_W:
+            moveUp();
+            break;
+        case Qt::Key_S:
+            moveDown();
+            break;
+        case Qt::Key_A:
+            moveLeft();
+            break;
+        case Qt::Key_D:
+            moveRight();
+            break;
+        default:break;
+    }
+}
+
+MainWindow::~MainWindow() {
+    field->clear();
+    delete field;
 }

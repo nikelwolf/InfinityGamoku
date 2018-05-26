@@ -8,6 +8,8 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QDebug>
+#include <QKeyEvent>
+
 #include "GameBoard.h"
 
 class MainWindow : public QMainWindow
@@ -16,7 +18,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-     ~MainWindow();
+     ~MainWindow() override;
 
 private:
 
@@ -32,6 +34,7 @@ private:
 
 private slots:
     void cellChanged(int id);
+    void keyPressEvent (QKeyEvent * e) override;
 
     void changePlayer();
     void moveUp();
