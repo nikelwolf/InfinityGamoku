@@ -8,8 +8,7 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QDebug>
-#include "GameView.h"
-#include "GamokuField.h"
+#include "GameBoard.h"
 
 class MainWindow : public QMainWindow
 {
@@ -22,12 +21,12 @@ public:
 private:
 
     QString symbol = "X";
+    QStringList symbols{"", "X", "O"};
     uint16_t value = 1;
     const int size = 16;
     const QSize cellSize = {32,32};
 
-    GamokuField gmf;
-    GameView gmv;
+    GameBoard gameBoard;
 
     QVector < QVector<QPushButton*>* >  *field;
 
@@ -35,6 +34,11 @@ private slots:
     void cellChanged(int id);
 
     void changePlayer();
+    void moveUp();
+    void moveDown();
+    void moveRight();
+    void moveLeft();
+    void updateView();
 };
 
 #endif // MAINWINDOW_H

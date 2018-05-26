@@ -2,7 +2,7 @@
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), gmv(gmf) {
+    : QMainWindow(parent) {
 
 
     auto *menuBar = new QMenuBar(this);
@@ -67,10 +67,11 @@ void MainWindow::cellChanged(int id)
     auto x = static_cast<uint64_t>(id % size);
     auto y = static_cast<uint64_t>(size-1 - id / size);
 
-    gmv.cell(x, y, value);
-    gmv.save_state();
-
-
+    gameBoard.set_cell(x, y, value);
+    if(gameBoard.has_winner() ){
+        qDebug("WIN");
+        QMessageBox::information(this, "Win", "You win!", QMessageBox::Ok);
+    }
     changePlayer();
 
     qDebug("Cell #%d", id);
@@ -86,6 +87,36 @@ void MainWindow::changePlayer(){
         value  = 1;
     }
 }
-MainWindow::~MainWindow(){
+MainWindow::~MainWindow(){ }
 
+void MainWindow::moveUp() {
+    gameBoard.move_up();
+    updateView();
+}
+
+void MainWindow::moveDown() {
+    gameBoard.move_down();
+    updateView();
+}
+
+void MainWindow::moveRight() {
+    gameBoard.move_right();
+    updateView();
+}
+
+void MainWindow::moveLeft() {
+    gameBoard.move_left();
+    updateView();
+}
+
+void MainWindow::updateView() {
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            auto cell = gameBoard.get_cell(i,j).ivalue();
+            if(cell == 0)
+                field->at(i)->at(j)->setEnabled(true);
+            field->at(i)->at(j)->setText(symbols[cell]);
+
+        }
+    }
 }

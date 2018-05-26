@@ -15,6 +15,7 @@ set(SOURCES
         source/GamokuField.cpp
         source/GameView.cpp
         source/mainwindow.cpp
+        source/GameBoard.cpp
         )
 
 set(HEADERS
@@ -24,6 +25,7 @@ set(HEADERS
         include/GamokuField.h
         include/GameView.h
         include/mainwindow.h
+        include/GameBoard.h
         )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
