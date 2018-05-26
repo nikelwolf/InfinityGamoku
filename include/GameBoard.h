@@ -16,6 +16,8 @@ public:
 
     void move_up();
 
+    void clear_board();
+
     void set_cell(uint64_t x, uint64_t y, uint64_t value);
 
     void set_cell(uint64_t x, uint64_t y, GamokuCellValue gcv);
