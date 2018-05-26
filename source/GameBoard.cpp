@@ -76,6 +76,11 @@ GamokuCellValue GameBoard::winner() const {
     return _winner_color;
 }
 
+ostream &operator<<(ostream &os, const GameBoard &gb) {
+    os << gb._outer_view;
+    return os;
+}
+
 void GameBoard::_set_cell_prefab_execute(uint64_t x, uint64_t y) {
     _last_setted_cell_index_x = x;
     _last_setted_cell_index_y = y;
@@ -105,7 +110,8 @@ void GameBoard::_check_line(bool x, bool y, bool is_exception_line) {
                                                 _last_setted_cell_index_y).value();
     _winner_color = last_gcv;
 
-    for (int64_t x_offset = -4, y_offset = is_exception_line ? 4 : -4, count_of_cells = 0;
+    int64_t x_offset, y_offset, count_of_cells;
+    for (x_offset = -4, y_offset = is_exception_line ? 4 : -4, count_of_cells = 0;
          x_offset < 5; x_offset++, is_exception_line ? y_offset-- : y_offset++) {
         if (count_of_cells < 5) {
             GamokuCellValue cur_gcv = _outer_view.cell(
@@ -126,6 +132,11 @@ void GameBoard::_check_line(bool x, bool y, bool is_exception_line) {
             _has_winner = true;
             return;
         }
+    }
+
+    if (count_of_cells == 5) {
+        _has_winner = true;
+        return;
     }
 
     _winner_color = GamokuCellValue::Empty;
