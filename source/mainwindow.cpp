@@ -18,43 +18,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->setMenuBar(menuBar);
 
-    QString cellStyle = "background-color: rgb(244, 164, 96); "
-                        "border: 1px solid #8a6642; "
-                        "color: black";
-    QString fieldColor = "background-color: rgb(255, 222, 90); "
-                         "border: 1px solid #8f8f91; ";
 
-    auto* widget = new QWidget(this);
-    auto* gridLayout = new QGridLayout(widget);
+
+    widget = new QWidget(this);
+    gridLayout = new QGridLayout(widget);
     gridLayout->setSpacing(0);
     gridLayout->setMargin(0);
 
     widget->setStyleSheet(fieldColor);
-
     field = new QVector<QVector<QPushButton*>*>();
-
-    int id = -1;
-    for(int i=0; i < size; ++i){
-        QVector <QPushButton*> *temp = new QVector<QPushButton*>();
-        field->push_back(temp);
-        for(int j=0; j < size; ++j){
-            auto* cell = new QPushButton("", this);
-            cell->setFixedSize(cellSize);
-            cell->setStyleSheet(cellStyle);
-            field->at(i)->push_back(cell);
-            cell->setObjectName(QString::number(++id));
-            //connect cell.clicked for getting id of cell
-            auto *mapper = new QSignalMapper(this);
-
-            connect(mapper, SIGNAL(mapped(int)), this, SLOT(cellChanged(int)));
-
-            connect(cell, SIGNAL(clicked()), mapper, SLOT(map()));
-            mapper->setMapping(cell, cell->objectName().toInt());
-            //
-
-            gridLayout->addWidget(field->at(i)->at(j), i, j, Qt::AlignCenter);
-        }
-    }
+    createUI();
 
     this->setCentralWidget(widget);
 }
@@ -73,6 +46,7 @@ void MainWindow::cellChanged(int id)
     if(gameBoard.has_winner() ){
         qDebug("WIN");
         QMessageBox::information(this, "Win", "You win!", QMessageBox::Ok);
+        clearField();
     }
     changePlayer();
 
@@ -114,18 +88,15 @@ void MainWindow::updateView() {
     for (uint64_t i = 0; i < size; ++i) {
         for (uint64_t j = 0; j < size; ++j) {
             auto cell = gameBoard.get_cell(i, size-1- j).ivalue();
-            if(cell == 0)
-                field->at(j)->at(i)->setEnabled(true);
-
+            field->at(j)->at(i)->setEnabled(cell == 0);
             field->at(j)->at(i)->setText(symbols[cell]);
-
         }
     }
 }
 
 void MainWindow::keyPressEvent (QKeyEvent * e)
 {
-    qDebug("Key pressed");
+    qDebug()<<"Key pressed"<<e->key();
     switch(e->key()) {
         case Qt::Key_W:
             moveUp();
@@ -146,4 +117,37 @@ void MainWindow::keyPressEvent (QKeyEvent * e)
 MainWindow::~MainWindow() {
     field->clear();
     delete field;
+}
+
+void MainWindow::clearField() {
+    gameBoard.clear_board();
+    for(int i=0; i < size; ++i)
+        field->removeAt(0);
+
+    createUI();
+}
+
+void MainWindow::createUI() {
+    int id = -1;
+    for(int i=0; i < size; ++i){
+        auto *temp = new QVector<QPushButton*>();
+        field->push_back(temp);
+        for(int j=0; j < size; ++j){
+            auto* cell = new QPushButton("", this);
+            cell->setFixedSize(cellSize);
+            cell->setStyleSheet(cellStyle);
+            field->at(i)->push_back(cell);
+            cell->setObjectName(QString::number(++id));
+            //connect cell.clicked for getting id of cell
+            auto *mapper = new QSignalMapper(this);
+
+            connect(mapper, SIGNAL(mapped(int)), this, SLOT(cellChanged(int)));
+
+            connect(cell, SIGNAL(clicked()), mapper, SLOT(map()));
+            mapper->setMapping(cell, cell->objectName().toInt());
+            //
+
+            gridLayout->addWidget(field->at(i)->at(j), i, j, Qt::AlignCenter);
+        }
+    }
 }
