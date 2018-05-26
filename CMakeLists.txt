@@ -3,7 +3,7 @@ project(InfinityGamoku)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(CMAKE_AUTOMOC)
+set(CMAKE_AUTOMOC ON)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
