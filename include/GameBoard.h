@@ -16,6 +16,8 @@ public:
 
     void move_up();
 
+    void clear_board();
+
     void set_cell(uint64_t x, uint64_t y, uint64_t value);
 
     void set_cell(uint64_t x, uint64_t y, GamokuCellValue gcv);
@@ -31,7 +33,6 @@ public:
     GamokuCellValue winner() const;
 
     friend ostream &operator<<(ostream &os, const GameBoard &gb);
-
 private:
     GamokuField _gf;
     GameView _inner_view;

@@ -30,6 +30,12 @@ void GameBoard::move_up() {
     _outer_view.move_up(1);
 }
 
+void GameBoard::clear_board() {
+    _gf.clear();
+    _inner_view.update_state();
+    _outer_view.update_state();
+}
+
 void GameBoard::set_cell(uint64_t x, uint64_t y, uint64_t value) {
     if (_has_winner)
         return;

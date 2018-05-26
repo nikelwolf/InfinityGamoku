@@ -154,6 +154,10 @@ void GameView::save_state() {
     _insert_data();
 }
 
+void GameView::update_state() {
+    _update_data();
+}
+
 ostream &operator<<(ostream &os, const GameView &gv) {
     os << gv._field_data;
     return os;
