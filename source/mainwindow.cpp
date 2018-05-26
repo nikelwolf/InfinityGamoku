@@ -65,8 +65,8 @@ void MainWindow::cellChanged(int id)
 
     field->at(id/size)->at(id%size)->setEnabled(false);
     field->at(id/size)->at(id%size)->setText(symbol);
-    auto y = static_cast<uint64_t>(id % size);
-    auto x = static_cast<uint64_t>(size-1 - id / size);
+    auto x = static_cast<uint64_t>(id % size);
+    auto y = static_cast<uint64_t>(size-1 - id / size);
 
 
     gameBoard.set_cell(x, y, value);
@@ -113,14 +113,11 @@ void MainWindow::moveLeft() {
 void MainWindow::updateView() {
     for (uint64_t i = 0; i < size; ++i) {
         for (uint64_t j = 0; j < size; ++j) {
-            auto cell = gameBoard.get_cell(j, i).ivalue();
+            auto cell = gameBoard.get_cell(i, size-1- j).ivalue();
             if(cell == 0)
-                field->at(i)->at(j)->setEnabled(true);
-            
+                field->at(j)->at(i)->setEnabled(true);
 
-            field->at(i)->at(j)->setText(symbols[cell]);
-            //auto x = static_cast<uint64_t>(id % size);
-            //auto y = static_cast<uint64_t>(size-1 - id / size);
+            field->at(j)->at(i)->setText(symbols[cell]);
 
         }
     }
