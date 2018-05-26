@@ -14,6 +14,7 @@ set(SOURCES
         source/FieldSector.cpp
         source/GamokuField.cpp
         source/GameView.cpp
+        source/GameBoard.cpp
         source/mainwindow.cpp
         source/GameBoard.cpp
         )
@@ -24,6 +25,7 @@ set(HEADERS
         include/FieldSector.h
         include/GamokuField.h
         include/GameView.h
+        include/GameBoard.h
         include/mainwindow.h
         include/GameBoard.h
         )

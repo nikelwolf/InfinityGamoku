@@ -30,6 +30,8 @@ public:
 
     GamokuCellValue winner() const;
 
+    friend ostream &operator<<(ostream &os, const GameBoard &gb);
+
 private:
     GamokuField _gf;
     GameView _inner_view;

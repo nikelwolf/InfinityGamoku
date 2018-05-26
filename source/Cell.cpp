@@ -1,8 +1,8 @@
 #include <GamokuCommon.h>
 
-Cell::Cell(): _value{GamokuCellValue::Empty} { }
+Cell::Cell() : _value{GamokuCellValue::Empty} {}
 
-Cell::Cell(GamokuCellValue val): _value{val} { }
+Cell::Cell(GamokuCellValue val) : _value{val} {}
 
 Cell::Cell(int val) {
     switch (val) {
