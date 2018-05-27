@@ -34,6 +34,7 @@ void GameBoard::clear_board() {
     _gf.clear();
     _inner_view.update_state();
     _outer_view.update_state();
+    _has_winner = false;
 }
 
 void GameBoard::set_cell(uint64_t x, uint64_t y, uint64_t value) {
