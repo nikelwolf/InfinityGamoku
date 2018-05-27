@@ -30,7 +30,11 @@ set(HEADERS
         include/GameBoard.h
         )
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+if (WIN32)
+    add_executable(${PROJECT_NAME} WIN32 ${SOURCES} ${HEADERS})
+else()
+    add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+endif()
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 target_link_libraries(${PROJECT_NAME} Qt5::Core)
 target_link_libraries(${PROJECT_NAME} Qt5::Gui)
