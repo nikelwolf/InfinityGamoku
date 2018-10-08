@@ -32,6 +32,8 @@ public:
 
     void save_state();
 
+    void update_state();
+
     friend ostream &operator<<(ostream &os, const GameView &gv);
 
     void _debug();

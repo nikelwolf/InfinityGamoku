@@ -2,8 +2,9 @@
 
 #include <iostream>
 #include <vector>
-#include <cstdint>
 #include <functional>
+#include <array>
+#include <cstdint>
 
 using namespace std;
 
@@ -11,3 +12,4 @@ using namespace std;
 #include <FieldSector.h>
 #include <GamokuField.h>
 #include <GameView.h>
+#include <GameBoard.h>

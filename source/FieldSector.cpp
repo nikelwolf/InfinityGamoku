@@ -19,13 +19,14 @@ ostream &operator<<(ostream &os, SectorType s) {
     return os;
 }
 
-FieldSector::FieldSector(): FieldSector(DEFAULT_SECTOR_SIZE, SectorType::UpperLeft) { }
+FieldSector::FieldSector() : FieldSector(DEFAULT_SECTOR_SIZE, SectorType::UpperLeft) {}
 
-FieldSector::FieldSector(SectorType type): FieldSector(DEFAULT_SECTOR_SIZE, type) { }
+FieldSector::FieldSector(SectorType type) : FieldSector(DEFAULT_SECTOR_SIZE, type) {}
 
-FieldSector::FieldSector(uint64_t s): FieldSector(s, SectorType::UpperRight) { }
+FieldSector::FieldSector(uint64_t s) : FieldSector(s, SectorType::UpperRight) {}
 
-FieldSector::FieldSector(uint64_t s, SectorType type): _sector_size{s}, _sector_type{type}, _sector_data{_sector_size} {
+FieldSector::FieldSector(uint64_t s, SectorType type) : _sector_size{s}, _sector_type{type},
+                                                        _sector_data{_sector_size} {
     for (uint64_t i = 0; i < _sector_size; i++) {
         _sector_data.at(i).resize(s);
     }
@@ -82,8 +83,8 @@ ostream &operator<<(ostream &os, const FieldSector &fs) {
     switch (fs._sector_type) {
         case SectorType::UpperLeft:
             for (uint64_t y = fs._sector_size; y > 0; y--) {
-                for (uint64_t x = fs._sector_size; x > 0 ; x--) {
-                    os << fs._sector_data.at(y-1).at(x-1);
+                for (uint64_t x = fs._sector_size; x > 0; x--) {
+                    os << fs._sector_data.at(y - 1).at(x - 1);
                 }
                 os << endl;
             }
@@ -92,7 +93,7 @@ ostream &operator<<(ostream &os, const FieldSector &fs) {
         case SectorType::UpperRight:
             for (uint64_t y = fs._sector_size; y > 0; y--) {
                 for (uint64_t x = 0; x < fs._sector_size; x++) {
-                    os << fs._sector_data.at(y-1).at(x);
+                    os << fs._sector_data.at(y - 1).at(x);
                 }
                 os << endl;
             }
@@ -110,7 +111,7 @@ ostream &operator<<(ostream &os, const FieldSector &fs) {
         case SectorType::LowerLeft:
             for (uint64_t y = 0; y < fs._sector_size; y++) {
                 for (uint64_t x = fs._sector_size; x > 0; x--) {
-                    os << fs._sector_data.at(y).at(x-1);
+                    os << fs._sector_data.at(y).at(x - 1);
                 }
                 os << endl;
             }
