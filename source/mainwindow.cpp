@@ -4,22 +4,6 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
 
-
-    auto *menuBar = new QMenuBar(this);
-    QMenu *menu = new QMenu("&Menu", this);
-    menu->setTearOffEnabled(true);
-    menu->addAction("&Player vs &Player", this, SLOT( clearField() ), Qt::CTRL + Qt::Key_P);
-    menu->addAction("Player vs &Bot", this, SLOT( playWithBot() ), Qt::CTRL + Qt::Key_B);
-    menu->addSeparator();
-    menu->addAction("&Exit", qApp, SLOT(quit()));
-
-
-    menuBar->addMenu(menu);
-
-    this->setMenuBar(menuBar);
-
-
-
     widget = new QWidget(this);
     gridLayout = new QGridLayout(widget);
     gridLayout->setSpacing(0);
@@ -57,26 +41,6 @@ void MainWindow::cellChanged(int id)
 }
 
 void MainWindow::changePlayer(){
-    if(bot){ //todo bot
-        int high = 2;
-        int low = -2;
-        while(true) {
-            qsrand(x_cur);
-            int x = x_last + qrand() % ((high -1) - low) + low;
-                    //size - x_last + rand() % 2;
-            int y = y_last + qrand() % ((high -1) - low) + low;
-
-
-            if (field->at(y)->at(x)->text().isEmpty()) {
-                field->at(y)->at(x)->setText(symbols[2]);
-                field->at(y)->at(x)->setEnabled(false);
-                gameBoard.set_cell(static_cast<uint64_t>(x), static_cast<uint64_t>(y), 2);
-                return;
-            }
-
-        }
-    }
-
     if(value == 1) {
         symbol = "O";
         value = 2;
@@ -166,16 +130,9 @@ void MainWindow::createUI() {
 
             connect(cell, SIGNAL(clicked()), mapper, SLOT(map()));
             mapper->setMapping(cell, cell->objectName().toInt());
-            //
 
             gridLayout->addWidget(field->at(i)->at(j), i, j, Qt::AlignCenter);
         }
     }
 }
 
-void MainWindow::playWithBot() {
-    clearField();
-    value = 1;
-    symbol = "X";
-    bot = true;
-}

@@ -31,14 +31,12 @@ private:
     uint16_t value = 1;
     const int size = 16;
     const QSize cellSize = {32,32};
-    bool bot = false;
     QWidget *widget;
     QGridLayout *gridLayout;
     int x_cur = size/2;
     int y_cur = size/2;
     int x_last;
     int y_last;
-
 
     GameBoard gameBoard;
 
